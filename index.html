@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>樂動捕手_首頁</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="screen">
+
+    <!-- 上：Title 區塊 -->
+    <section class="zone zone-title">
+      <img class="title-image" src="assets/webp/title.webp" alt="樂動捕手" width="2510" height="920">
+    </section>
+
+    <!-- 中：性別/年齡選擇器 -->
+    <section class="zone zone-selectors">
+      <div class="selector-stack">
+
+        <!-- 性別選擇器 -->
+        <div class="selector-card" data-selector="gender">
+          <div class="selector-label">性別</div>
+          <div class="selector-control">
+            <button type="button" class="tri-btn tri-btn--left" aria-label="上一個性別選項" data-action="prev">
+              <svg class="tri-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <polygon points="19,4 5,12 19,20" fill="var(--btn-tri)" stroke="var(--btn-tri)" stroke-width="5"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <span class="selector-value" data-value>女</span>
+            <button type="button" class="tri-btn tri-btn--right" aria-label="下一個性別選項" data-action="next">
+              <svg class="tri-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <polygon points="5,4 19,12 5,20" fill="var(--btn-tri)" stroke="var(--btn-tri)" stroke-width="5"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 年齡選擇器 -->
+        <div class="selector-card" data-selector="age" data-min="1" data-max="120" data-default="70">
+          <div class="selector-label">年齡</div>
+          <div class="selector-control">
+            <button type="button" class="tri-btn tri-btn--left" aria-label="年齡減一" data-action="prev">
+              <svg class="tri-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <polygon points="19,4 5,12 19,20" fill="var(--btn-tri)" stroke="var(--btn-tri)" stroke-width="5"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <span class="selector-value" data-value>70</span>
+            <button type="button" class="tri-btn tri-btn--right" aria-label="年齡加一" data-action="next">
+              <svg class="tri-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <polygon points="5,4 19,12 5,20" fill="var(--btn-tri)" stroke="var(--btn-tri)" stroke-width="5"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 下：進入遊戲按鈕 -->
+    <section class="zone zone-cta">
+      <button type="button" class="enter-btn" id="enterGameBtn">
+        <img class="enter-btn__image" src="assets/webp/entergame_white.webp" alt="進入遊戲" width="1746" height="353">
+        <svg class="enter-btn__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M3 12h16M13 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+    </section>
+
+  </div>
+
+  <script src="js/scripts.js"></script>
+</body>
+
+</html>

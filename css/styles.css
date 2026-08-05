@@ -1,0 +1,409 @@
+@charset "UTF-8";
+
+:root {
+  /* background */
+  --bg-white: #ffffff;
+  --bg-lightpurple: #FCE6FF;
+  --bg-darkpurple:#8542b8;
+  --bg-yellow:#FFFADF;
+  --bg-blue:#DBEDFF;
+  --bg-green:#D8FFE4;
+
+  /* word */
+  --word-white:#FFFFFF;
+  --word-purple:#8542b8;
+  --word-yellow:#B5853E;
+  --word-blue:#4F3EB5;
+  --word-green:#43B53E;
+
+  /* button */
+  --btn-tri:#CE9ED5;
+  --btn-tri-shadow:#efe0f0;
+  --btn-purple:#8542b8;
+
+  --btn-level-yellow:#FFE0A4;
+  --btn-level-blue:#AAC7FF;
+  --btn-level-green:#A4FFAC;
+  
+  --btn-yellow:#FFC85E;
+  --btn-blue:#6D9EFF;
+  --btn-green:#59EA67;
+
+  /* border */
+  --border-purple:#8542b8;
+
+  --border-level-yellow:#FEA700;
+  --border-level-blue:#1C5FE2;
+  --border-level-green:#1BCC2C;
+
+  --border-yellow:#FFC85E;
+  --border-blue:#6D9EFF;
+  --border-green:#59EA67;
+
+
+  /* circle */
+
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--bg-lightpurple);
+  color: var(--default-word);
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  width: 100%;
+}
+
+.zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+}
+
+.zone-title {
+  flex: 6 1 0;
+  padding: 1.5rem clamp(1rem, 6vw, 3rem);
+}
+
+.zone-selectors {
+  flex: 2.5 1 0;
+  padding: 1rem clamp(1rem, 6vw, 3rem);
+}
+
+.zone-cta {
+  flex: 1.5 1 0;
+  padding: 1rem 0rem clamp(1rem, 4vh, 2rem);
+  justify-content: flex-end;
+}
+
+/* ---------- Title ---------- */
+.title-image {
+  max-width: min(90%, 800px);
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ---------- Selectors ---------- */
+.selector-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 3vh, 1.75rem);
+  width: 100%;
+}
+
+.selector-card {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: min(90%, 420px);
+  background: var(--bg-white);
+  border: 8px solid var(--border-purple);
+  border-radius: 999px;
+  overflow: visible;
+}
+
+.selector-label {
+  position: absolute;
+  left: -7px;
+  top: -7px;
+  bottom: -7px;
+  width: 42%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-darkpurple);
+  color: var(--word-white);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  letter-spacing: 0.05em;
+  padding: 0.8rem 0.5rem;
+  border-radius: 999px;
+  z-index: 2;
+}
+
+.selector-control {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem clamp(0.5rem, 3vw, 1rem);
+  padding-left: calc(42% + 0.75rem);
+  gap: 0.5rem;
+}
+
+.selector-value {
+  flex: 1 1 auto;
+  text-align: center;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 700;
+  color: var(--word-purple);
+  min-width: 2ch;
+  padding: 0 0.4rem;
+  user-select: none;
+}
+
+.tri-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  width: 3rem;
+  height: 3rem;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.tri-btn:hover {
+  background-color: var(--btn-tri-shadow);
+}
+
+.tri-btn:active {
+  transform: scale(0.9);
+}
+
+.tri-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  display: block;
+}
+
+.tri-btn:focus-visible {
+  outline: 2px solid var(--btn-tri);
+  outline-offset: 2px;
+}
+
+/* ---------- CTA ---------- */
+.enter-btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 2vw, 1rem);
+  padding: clamp(0.9rem, 3vh, 1.3rem) clamp(1rem, 4vw, 1.75rem) clamp(0.9rem, 3vh, 1.3rem) clamp(1.75rem, 6vw, 2.75rem);
+  background: linear-gradient(var(--btn-purple));
+  color: #fff;
+  border-radius: 999px 0 0 999px;
+  max-width: min(90%, 300px);
+  width: 100%;
+}
+
+.enter-btn:hover {
+  transform: translateY(-2px);
+}
+
+.enter-btn:active {
+  transform: translateY(0);
+}
+
+.enter-btn:focus-visible {
+  outline: 3px solid var(--bg-darkpurple);
+  outline-offset: 3px;
+}
+
+.enter-btn__image {
+  height: clamp(1.6rem, 6vh, 2.4rem);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.enter-btn__arrow {
+  height: clamp(1.6rem, 6vh, 2.4rem);
+  width: clamp(1.6rem, 6vh, 2.4rem);
+  color: #fff;
+  flex: 0 0 auto;
+}
+
+/* ==========================================
+   關卡選擇頁面 (level_select.html) 專用樣式
+   ========================================== */
+
+.screen-level-select {
+  background-color: var(--bg-lightpurple);
+}
+
+.level-zone {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.zone-top {
+  flex: 0.5 1 0;
+}
+
+.zone-header {
+  flex: 3 1 0;
+  background-color: var(--bg-darkpurple);
+  padding: 1rem clamp(1rem, 4vw, 2.5rem);
+}
+
+.zone-levels {
+  flex: 6.5 1 0;
+  padding: 1rem clamp(1rem, 5vw, 3rem);
+}
+
+/* 中間標題圖片 */
+.header-image {
+  max-width: min(90%, 750px);
+  max-height: 80%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* 關卡按鈕容器 */
+.level-btn-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.2rem, 3.8vh, 2.2rem);
+  width: 100%;
+  max-width: min(92%, 620px);
+}
+
+/* ------------------------------------------
+   布條按鈕（更寬/更高、全邊框、帶圓角）
+   ------------------------------------------ */
+.ribbon-btn {
+  appearance: none;
+  position: relative;
+  width: 100%;
+  /* 增加高度與寬度感 */
+  height: clamp(7rem, 12vh, 9rem);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ribbon-btn:hover {
+  transform: scale(1.03);
+}
+
+.ribbon-btn:active {
+  transform: scale(0.97);
+}
+
+.ribbon-btn:focus-visible {
+  outline: 4px solid var(--bg-darkpurple);
+  outline-offset: 4px;
+  border-radius: 20px;
+}
+
+/* 布條形狀外框與背景 SVG (確保所有角落導圓角與全外框展現) */
+.ribbon-btn__shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* 關卡 1：黃色主題 */
+.ribbon-btn--yellow .ribbon-path-bg {
+  fill: var(--btn-level-yellow);
+}
+.ribbon-btn--yellow .ribbon-path-stroke {
+  stroke: var(--border-level-yellow);
+}
+
+/* 關卡 2：藍色主題 */
+.ribbon-btn--blue .ribbon-path-bg {
+  fill: var(--btn-level-blue);
+}
+.ribbon-btn--blue .ribbon-path-stroke {
+  stroke: var(--border-level-blue);
+}
+
+/* 關卡 3：綠色主題 */
+.ribbon-btn--green .ribbon-path-bg {
+  fill: var(--btn-level-green);
+}
+.ribbon-btn--green .ribbon-path-stroke {
+  stroke: var(--border-level-green);
+}
+
+/* 按鈕內圖片 */
+.ribbon-btn__img {
+  max-width: 70%;
+  max-height: 60%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- 減弱動畫相容性 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-btn {
+    transition: none;
+  }
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 380px) {
+  .selector-label {
+    font-size: 0.95rem;
+  }
+
+  .tri-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .tri-icon {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .enter-btn,
+  .tri-btn {
+    transition: none;
+  }
+}
