@@ -61,8 +61,15 @@ body {
   min-height: 100dvh;
   background-color: var(--bg-lightpurple);
   color: var(--word-default);
-  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system,
-    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    "Noto Sans TC",
+    "PingFang TC",
+    "Microsoft JhengHei",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
   overflow: hidden;
 }
 
@@ -103,7 +110,6 @@ body {
 /* ==========================================
    首頁元件 (Index Components)
    ========================================== */
-/* ---------- Title ---------- */
 .title-image {
   max-width: min(90%, 800px);
   max-height: 100%;
@@ -112,7 +118,6 @@ body {
   object-fit: contain;
 }
 
-/* ---------- Selectors ---------- */
 .selector-stack {
   display: flex;
   flex-direction: column;
@@ -174,7 +179,6 @@ body {
   user-select: none;
 }
 
-/* 三角按鈕 */
 .tri-btn {
   appearance: none;
   border: none;
@@ -187,7 +191,9 @@ body {
   justify-content: center;
   cursor: pointer;
   border-radius: 50%;
-  transition: background-color 0.15s ease, transform 0.1s ease;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease;
 }
 
 .tri-btn:hover {
@@ -209,7 +215,6 @@ body {
   display: block;
 }
 
-/* ---------- CTA 按鈕 ---------- */
 .enter-btn {
   appearance: none;
   border: none;
@@ -294,7 +299,6 @@ body {
   object-fit: contain;
 }
 
-/* 關卡按鈕組 */
 .level-btn-group {
   display: flex;
   flex-direction: column;
@@ -305,7 +309,6 @@ body {
   max-width: min(92%, 620px);
 }
 
-/* 布條按鈕 */
 .ribbon-btn {
   appearance: none;
   position: relative;
@@ -353,7 +356,6 @@ body {
   z-index: 2;
 }
 
-/* 主題顏色分派 */
 .ribbon-btn--yellow .ribbon-path-bg {
   fill: var(--btn-level-yellow);
 }
@@ -373,6 +375,277 @@ body {
 }
 .ribbon-btn--green .ribbon-path-stroke {
   stroke: var(--border-level-green);
+}
+
+/* ==========================================
+   關卡說明頁面 (Level Intro Page 通用/Level 1 基礎)
+   ========================================== */
+.screen-level-intro {
+  background-color: var(--bg-yellow); /* Level 1 預設黃色背景 */
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2.5rem, 8vh, 5rem) clamp(2rem, 8vw, 4.5rem);
+}
+
+/* ---------- 關卡說明頁：頁面背景色控制 (Level 2 & Level 3) ---------- */
+/* Level 2 專用：全頁藍色背景 */
+.screen-level-intro--blue {
+  background-color: var(--bg-blue);
+}
+
+/* Level 3 專用：全頁綠色背景 */
+.screen-level-intro--green {
+  background-color: var(--bg-green);
+}
+
+/* 卡片外框 */
+.intro-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(90%, 1150px);
+  height: 100%;
+  background: transparent;
+  border: 8px solid var(--border-yellow);
+  border-radius: clamp(2rem, 5vw, 3rem);
+  padding: clamp(3rem, 7vh, 4.5rem) clamp(2rem, 6vw, 3.5rem)
+    clamp(3rem, 7vh, 4.5rem);
+  overflow: visible;
+}
+
+.intro-card__title-banner {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(16rem, 42vw, 30rem);
+  aspect-ratio: 5 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.intro-card__title-banner .ribbon-btn__shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.intro-card__title-banner .ribbon-path-bg {
+  fill: var(--btn-yellow);
+}
+
+.intro-card__title-banner .ribbon-path-stroke {
+  stroke: var(--border-yellow);
+}
+
+.intro-card__title-img {
+  position: relative;
+  z-index: 2;
+  max-width: 70%;
+  max-height: 65%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.intro-card__content {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.intro-card__rows {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: clamp(1rem, 3vw, 2rem);
+  row-gap: clamp(1.5rem, 5vh, 2.75rem);
+  align-items: start;
+  width: 100%;
+}
+
+.intro-card__label,
+.intro-card__text {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--word-yellow);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.intro-card__label {
+  white-space: nowrap;
+}
+
+.intro-card__text ol {
+  margin: 0;
+  padding-left: 1.3em;
+}
+
+.intro-card__text li {
+  margin-bottom: 0.2em;
+}
+
+.intro-card__enter-btn {
+  appearance: none;
+  border: 8px solid var(--border-yellow);
+  cursor: pointer;
+  background: var(--btn-yellow);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.5rem, 2vh, 1rem) clamp(2rem, 5vw, 3rem);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  z-index: 3;
+  transition: transform 0.15s ease;
+}
+
+.intro-card__enter-btn:hover {
+  transform: translate(-50%, 50%) translateY(-2px) scale(1.03);
+}
+
+.intro-card__enter-btn:active {
+  transform: translate(-50%, 50%) translateY(0) scale(0.97);
+}
+
+.intro-card__enter-btn:focus-visible {
+  outline: 3px solid var(--border-level-yellow);
+  outline-offset: 3px;
+}
+
+.intro-card__enter-btn img {
+  height: clamp(2.1rem, 6.5vh, 3rem);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ---------- 關卡說明頁：Level 2 藍色卡片主題 ---------- */
+.intro-card--blue {
+  border-color: var(--border-blue);
+}
+.intro-card--blue .intro-card__title-banner .ribbon-path-bg {
+  fill: var(--btn-blue);
+}
+.intro-card--blue .intro-card__title-banner .ribbon-path-stroke {
+  stroke: var(--border-blue);
+}
+.intro-card--blue .intro-card__label,
+.intro-card--blue .intro-card__text {
+  color: var(--word-blue);
+}
+.intro-card--blue .intro-card__enter-btn {
+  border-color: var(--border-blue);
+  background: var(--btn-blue);
+}
+.intro-card--blue .intro-card__enter-btn:focus-visible {
+  outline-color: var(--border-level-blue);
+}
+
+/* ---------- 關卡說明頁：Level 3 綠色卡片主題 ---------- */
+.intro-card--green {
+  border-color: var(--border-green);
+}
+.intro-card--green .intro-card__title-banner .ribbon-path-bg {
+  fill: var(--btn-green);
+}
+.intro-card--green .intro-card__title-banner .ribbon-path-stroke {
+  stroke: var(--border-green);
+}
+.intro-card--green .intro-card__label,
+.intro-card--green .intro-card__text {
+  color: var(--word-green);
+}
+.intro-card--green .intro-card__enter-btn {
+  border-color: var(--border-green);
+  background: var(--btn-green);
+}
+.intro-card--green .intro-card__enter-btn:focus-visible {
+  outline-color: var(--border-level-green);
+}
+
+/* ---------- 裝飾圖通用設定 ---------- */
+.intro-dec {
+  position: absolute;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* ---------- Level 1 裝飾圖 ---------- */
+.intro-dec--blue {
+  left: clamp(-3rem, -8vw, -1.5rem);
+  bottom: clamp(-3rem, -8vw, -1.5rem);
+  width: clamp(7rem, 18vw, 11rem);
+  z-index: 5;
+}
+
+.intro-dec--green {
+  left: clamp(3rem, 9vw, 6rem);
+  bottom: clamp(2rem, 7vh, 4rem);
+  width: clamp(5rem, 14vw, 8rem);
+}
+
+.intro-dec--purple {
+  right: clamp(-3rem, -8vw, -1.5rem);
+  top: clamp(-3.5rem, -8.5vw, -2rem);
+  width: clamp(5.5rem, 15vw, 9.5rem);
+  z-index: 5;
+}
+
+/* ---------- Level 2 裝飾圖 ---------- */
+.intro-dec--l2-red {
+  left: clamp(1rem, 3.5vw, 2.25rem);
+  bottom: clamp(1rem, 3.5vh, 2.25rem);
+  width: clamp(5rem, 13vw, 7.5rem);
+  z-index: 4;
+}
+
+.intro-dec--l2-yellow {
+  right: clamp(1rem, 3.5vw, 2.25rem);
+  top: clamp(1rem, 3.5vh, 2.25rem);
+  width: clamp(5rem, 13vw, 7.5rem);
+  z-index: 4;
+}
+
+/* ---------- Level 3 裝飾圖 ---------- */
+.intro-dec--l3-purple {
+  left: clamp(-3rem, -8vw, -1.5rem);
+  bottom: clamp(-2.5rem, -7vw, -1.5rem);
+  width: clamp(6rem, 16vw, 8.5rem);
+  transform: rotate(-15deg);
+  transform-origin: center;
+  z-index: 5;
+}
+
+.intro-dec--l3-red {
+  left: clamp(1.5rem, 6vw, 3rem);
+  bottom: clamp(6rem, 12vh, 9rem);
+  width: clamp(4.5rem, 11vw, 6.5rem);
+  transform: rotate(10deg);
+  transform-origin: center;
+  z-index: 6;
+}
+
+.intro-dec--l3-white {
+  right: clamp(2.5rem, 12vw, 6.5rem);
+  bottom: clamp(-2.5rem, -4vw, -3.5rem);
+  width: clamp(8rem, 15vw, 9rem);
+  transform: rotate(15deg);
+  transform-origin: center;
+  z-index: 3;
 }
 
 /* ==========================================
@@ -397,7 +670,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .enter-btn,
   .tri-btn,
-  .ribbon-btn {
+  .ribbon-btn,
+  .intro-card__enter-btn {
     transition: none;
   }
 }

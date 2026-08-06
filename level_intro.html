@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>關卡說明</title>
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 預設結構，顏色與背景會由 JS 動態切換 -->
+    <div id="intro-screen" class="screen screen-level-intro">
+        <div id="intro-card" class="intro-card">
+
+            <!-- 標題底框 -->
+            <div class="intro-card__title-banner">
+                <svg class="ribbon-btn__shape" viewBox="0 0 500 100" preserveAspectRatio="none" aria-hidden="true">
+                    <path class="ribbon-path-bg ribbon-path-stroke"
+                        d="M 25 6 L 475 6 A 10 10 0 0 1 484 11 L 455 50 L 484 89 A 10 10 0 0 1 475 94 L 25 94 A 10 10 0 0 1 16 89 L 45 50 L 16 11 A 10 10 0 0 1 25 6 Z"
+                        stroke-width="7" stroke-linejoin="round" stroke-linecap="round" />
+                </svg>
+                <img id="intro-title-img" class="intro-card__title-img"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="關卡標題">
+            </div>
+
+            <!-- 說明內容 -->
+            <div class="intro-card__content">
+                <div class="intro-card__rows">
+                    <span class="intro-card__label">遊戲目標：</span>
+                    <p id="intro-target" class="intro-card__text"></p>
+
+                    <span class="intro-card__label">玩法說明：</span>
+                    <div class="intro-card__text">
+                        <ol id="intro-rules">
+                            <!-- 規則由 JS 動態生成 -->
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 進入關卡按鈕 -->
+            <button id="intro-enter-btn" type="button" class="intro-card__enter-btn" data-href="">
+                <img src="assets/webp/entergame_white.webp" alt="進入遊戲">
+            </button>
+
+            <!-- 動態裝飾圖容器 -->
+            <div id="intro-dec-container"></div>
+        </div>
+    </div>
+
+    <script src="js/scripts.js"></script>
+    <script>
+        // 1. 各關卡的設定資料
+        const levelData = {
+            1: {
+                title: '形狀獵人_關卡說明',
+                screenClass: '', // 第一關預設黃色，不需額外 class
+                cardClass: '',
+                titleImg: 'assets/webp/level1_title_white.webp',
+                titleAlt: '第一關 形狀獵人',
+                target: '辨認目標圖形。',
+                rules: [
+                    '遊戲開始前，會出現本關目標圖形。',
+                    '畫面會出現各種圖形，每個顯示3秒。',
+                    '若圖形與目標相同，立即點擊。'
+                ],
+                gameHref: 'level1_game.html',
+                decorations: [
+                    { class: 'intro-dec intro-dec--blue', src: 'assets/webp/level1_dec_blue.webp' },
+                    { class: 'intro-dec intro-dec--green', src: 'assets/webp/level1_dec_green.webp' },
+                    { class: 'intro-dec intro-dec--purple', src: 'assets/webp/level1_dec_purple.webp' }
+                ]
+            },
+            2: {
+                title: '方向快手_關卡說明',
+                screenClass: 'screen-level-intro--blue',
+                cardClass: 'intro-card--blue',
+                titleImg: 'assets/webp/level2_title_white.webp',
+                titleAlt: '第二關 方向快手',
+                target: '依提示選擇正確方向。',
+                rules: [
+                    '畫面上有四個方向的按鈕。',
+                    '畫面四個區塊會隨機閃爍提示位置。',
+                    '根據閃爍位置，點選對應方向按鈕。'
+                ],
+                gameHref: 'level2_game.html',
+                decorations: [
+                    { class: 'intro-dec intro-dec--l2-red', src: 'assets/webp/level2_dec_red.webp' },
+                    { class: 'intro-dec intro-dec--l2-yellow', src: 'assets/webp/level2_dec_yellow.webp' }
+                ]
+            },
+            3: {
+                title: '色字挑戰_關卡說明',
+                screenClass: 'screen-level-intro--green',
+                cardClass: 'intro-card--green',
+                titleImg: 'assets/webp/level3_title_white.webp',
+                titleAlt: '第三關 色字挑戰',
+                target: '依規則判斷文字內容或顏色。',
+                rules: [
+                    '遊戲開始前，會顯示本關作答規則。',
+                    '畫面會出現彩色文字，每個顯示3秒。',
+                    '請依規則點擊正確選項。'
+                ],
+                gameHref: 'level3_game.html',
+                decorations: [
+                    { class: 'intro-dec intro-dec--l3-purple', src: 'assets/webp/level3_dec_purple.webp' },
+                    { class: 'intro-dec intro-dec--l3-red', src: 'assets/webp/level3_dec_red.webp' },
+                    { class: 'intro-dec intro-dec--l3-white', src: 'assets/webp/level3_dec_white.webp' }
+                ]
+            }
+        };
+
+        // 2. 取得網址列中的 level 參數 (例如 level_intro.html?level=2)
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentLevel = urlParams.get('level') || '1'; // 若未帶參數預設為第 1 關
+        const data = levelData[currentLevel] || levelData[1];
+
+        // 3. 渲染頁面內容
+        document.title = data.title;
+
+        // 設定 Screen 與 Card 的顏色主題 Class
+        const screenEl = document.getElementById('intro-screen');
+        const cardEl = document.getElementById('intro-card');
+        if (data.screenClass) screenEl.classList.add(data.screenClass);
+        if (data.cardClass) cardEl.classList.add(data.cardClass);
+
+        // 設定標題圖片與目標
+        const titleImgEl = document.getElementById('intro-title-img');
+        titleImgEl.src = data.titleImg;
+        titleImgEl.alt = data.titleAlt;
+        document.getElementById('intro-target').textContent = data.target;
+
+        // 動態生成玩法說明步驟
+        const rulesOl = document.getElementById('intro-rules');
+        rulesOl.innerHTML = data.rules.map(rule => `<li>${rule}</li>`).join('');
+
+        // 設定進入遊戲按鈕連結
+        const enterBtn = document.getElementById('intro-enter-btn');
+        enterBtn.setAttribute('data-href', data.gameHref);
+
+        // 動態注入裝飾圖案
+        const decContainer = document.getElementById('intro-dec-container');
+        data.decorations.forEach(dec => {
+            const img = document.createElement('img');
+            img.className = dec.class;
+            img.src = dec.src;
+            img.alt = '';
+            img.setAttribute('aria-hidden', 'true');
+            decContainer.appendChild(img);
+        });
+    </script>
+</body>
+
+</html>
