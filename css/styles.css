@@ -1,48 +1,48 @@
 @charset "UTF-8";
 
+/* ==========================================
+   全域變數與重置 (Variables & Reset)
+   ========================================== */
 :root {
   /* background */
   --bg-white: #ffffff;
-  --bg-lightpurple: #FCE6FF;
-  --bg-darkpurple:#8542b8;
-  --bg-yellow:#FFFADF;
-  --bg-blue:#DBEDFF;
-  --bg-green:#D8FFE4;
+  --bg-lightpurple: #fce6ff;
+  --bg-darkpurple: #8542b8;
+  --bg-yellow: #fffadf;
+  --bg-blue: #dbedff;
+  --bg-green: #d8ffe4;
 
   /* word */
-  --word-white:#FFFFFF;
-  --word-purple:#8542b8;
-  --word-yellow:#B5853E;
-  --word-blue:#4F3EB5;
-  --word-green:#43B53E;
+  --word-default: #333333;
+  --word-white: #ffffff;
+  --word-purple: #8542b8;
+  --word-yellow: #b5853e;
+  --word-blue: #4f3eb5;
+  --word-green: #43b53e;
 
   /* button */
-  --btn-tri:#CE9ED5;
-  --btn-tri-shadow:#efe0f0;
-  --btn-purple:#8542b8;
+  --btn-tri: #ce9ed5;
+  --btn-tri-shadow: #efe0f0;
+  --btn-purple: #8542b8;
 
-  --btn-level-yellow:#FFE0A4;
-  --btn-level-blue:#AAC7FF;
-  --btn-level-green:#A4FFAC;
-  
-  --btn-yellow:#FFC85E;
-  --btn-blue:#6D9EFF;
-  --btn-green:#59EA67;
+  --btn-level-yellow: #ffe0a4;
+  --btn-level-blue: #aac7ff;
+  --btn-level-green: #a4ffac;
+
+  --btn-yellow: #ffc85e;
+  --btn-blue: #6d9eff;
+  --btn-green: #59ea67;
 
   /* border */
-  --border-purple:#8542b8;
+  --border-purple: #8542b8;
 
-  --border-level-yellow:#FEA700;
-  --border-level-blue:#1C5FE2;
-  --border-level-green:#1BCC2C;
+  --border-level-yellow: #fea700;
+  --border-level-blue: #1c5fe2;
+  --border-level-green: #1bcc2c;
 
-  --border-yellow:#FFC85E;
-  --border-blue:#6D9EFF;
-  --border-green:#59EA67;
-
-
-  /* circle */
-
+  --border-yellow: #ffc85e;
+  --border-blue: #6d9eff;
+  --border-green: #59ea67;
 }
 
 *,
@@ -60,12 +60,15 @@ body {
   margin: 0;
   min-height: 100dvh;
   background-color: var(--bg-lightpurple);
-  color: var(--default-word);
+  color: var(--word-default);
   font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system,
     BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow: hidden;
 }
 
+/* ==========================================
+   版面區塊結構 (Layout & Zones)
+   ========================================== */
 .screen {
   display: flex;
   flex-direction: column;
@@ -97,6 +100,9 @@ body {
   justify-content: flex-end;
 }
 
+/* ==========================================
+   首頁元件 (Index Components)
+   ========================================== */
 /* ---------- Title ---------- */
 .title-image {
   max-width: min(90%, 800px);
@@ -168,6 +174,7 @@ body {
   user-select: none;
 }
 
+/* 三角按鈕 */
 .tri-btn {
   appearance: none;
   border: none;
@@ -191,18 +198,18 @@ body {
   transform: scale(0.9);
 }
 
+.tri-btn:focus-visible {
+  outline: 2px solid var(--btn-tri);
+  outline-offset: 2px;
+}
+
 .tri-icon {
   width: 1.6rem;
   height: 1.6rem;
   display: block;
 }
 
-.tri-btn:focus-visible {
-  outline: 2px solid var(--btn-tri);
-  outline-offset: 2px;
-}
-
-/* ---------- CTA ---------- */
+/* ---------- CTA 按鈕 ---------- */
 .enter-btn {
   appearance: none;
   border: none;
@@ -212,7 +219,8 @@ body {
   align-items: center;
   justify-content: center;
   gap: clamp(0.5rem, 2vw, 1rem);
-  padding: clamp(0.9rem, 3vh, 1.3rem) clamp(1rem, 4vw, 1.75rem) clamp(0.9rem, 3vh, 1.3rem) clamp(1.75rem, 6vw, 2.75rem);
+  padding: clamp(0.9rem, 3vh, 1.3rem) clamp(1rem, 4vw, 1.75rem)
+    clamp(0.9rem, 3vh, 1.3rem) clamp(1.75rem, 6vw, 2.75rem);
   background: linear-gradient(var(--btn-purple));
   color: #fff;
   border-radius: 999px 0 0 999px;
@@ -249,9 +257,8 @@ body {
 }
 
 /* ==========================================
-   關卡選擇頁面 (level_select.html) 專用樣式
+   關卡選擇頁面 (Level Select Page)
    ========================================== */
-
 .screen-level-select {
   background-color: var(--bg-lightpurple);
 }
@@ -279,7 +286,6 @@ body {
   padding: 1rem clamp(1rem, 5vw, 3rem);
 }
 
-/* 中間標題圖片 */
 .header-image {
   max-width: min(90%, 750px);
   max-height: 80%;
@@ -288,7 +294,7 @@ body {
   object-fit: contain;
 }
 
-/* 關卡按鈕容器 */
+/* 關卡按鈕組 */
 .level-btn-group {
   display: flex;
   flex-direction: column;
@@ -299,14 +305,11 @@ body {
   max-width: min(92%, 620px);
 }
 
-/* ------------------------------------------
-   布條按鈕（更寬/更高、全邊框、帶圓角）
-   ------------------------------------------ */
+/* 布條按鈕 */
 .ribbon-btn {
   appearance: none;
   position: relative;
   width: 100%;
-  /* 增加高度與寬度感 */
   height: clamp(7rem, 12vh, 9rem);
   border: none;
   background: transparent;
@@ -332,7 +335,6 @@ body {
   border-radius: 20px;
 }
 
-/* 布條形狀外框與背景 SVG (確保所有角落導圓角與全外框展現) */
 .ribbon-btn__shape {
   position: absolute;
   inset: 0;
@@ -341,31 +343,6 @@ body {
   z-index: 1;
 }
 
-/* 關卡 1：黃色主題 */
-.ribbon-btn--yellow .ribbon-path-bg {
-  fill: var(--btn-level-yellow);
-}
-.ribbon-btn--yellow .ribbon-path-stroke {
-  stroke: var(--border-level-yellow);
-}
-
-/* 關卡 2：藍色主題 */
-.ribbon-btn--blue .ribbon-path-bg {
-  fill: var(--btn-level-blue);
-}
-.ribbon-btn--blue .ribbon-path-stroke {
-  stroke: var(--border-level-blue);
-}
-
-/* 關卡 3：綠色主題 */
-.ribbon-btn--green .ribbon-path-bg {
-  fill: var(--btn-level-green);
-}
-.ribbon-btn--green .ribbon-path-stroke {
-  stroke: var(--border-level-green);
-}
-
-/* 按鈕內圖片 */
 .ribbon-btn__img {
   max-width: 70%;
   max-height: 60%;
@@ -376,14 +353,31 @@ body {
   z-index: 2;
 }
 
-/* ---------- 減弱動畫相容性 ---------- */
-@media (prefers-reduced-motion: reduce) {
-  .ribbon-btn {
-    transition: none;
-  }
+/* 主題顏色分派 */
+.ribbon-btn--yellow .ribbon-path-bg {
+  fill: var(--btn-level-yellow);
+}
+.ribbon-btn--yellow .ribbon-path-stroke {
+  stroke: var(--border-level-yellow);
 }
 
-/* ---------- Small screens ---------- */
+.ribbon-btn--blue .ribbon-path-bg {
+  fill: var(--btn-level-blue);
+}
+.ribbon-btn--blue .ribbon-path-stroke {
+  stroke: var(--border-level-blue);
+}
+
+.ribbon-btn--green .ribbon-path-bg {
+  fill: var(--btn-level-green);
+}
+.ribbon-btn--green .ribbon-path-stroke {
+  stroke: var(--border-level-green);
+}
+
+/* ==========================================
+   響應式與可存取性 (RWD & Accessibility)
+   ========================================== */
 @media (max-width: 380px) {
   .selector-label {
     font-size: 0.95rem;
@@ -401,9 +395,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .enter-btn,
-  .tri-btn {
+  .tri-btn,
+  .ribbon-btn {
     transition: none;
   }
 }
