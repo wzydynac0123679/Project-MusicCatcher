@@ -60,9 +60,11 @@
       "button, .ribbon-btn, .enter-btn, .tri-btn",
     );
     buttons.forEach(function (btn) {
+      /*
       btn.addEventListener("mouseenter", function () {
         playHoverSound();
       });
+      */
 
       btn.addEventListener("click", function () {
         playClickSound();
