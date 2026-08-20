@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>形狀獵人_關卡</title>
+    <title>形狀獵人</title>
     <link href="css/styles.css" rel="stylesheet">
+    <link href="css/level1_game.css" rel="stylesheet">
 </head>
 
 <body>
@@ -32,13 +33,49 @@
                 <span class="bubble bubble--9"></span>
                 <span class="bubble bubble--10"></span>
             </div>
+
             <div class="game-body__content">
-                <!-- 遊戲玩法內容，待後續實作 -->
+
+                <!-- 遊戲卡片畫面（倒數結束後才會顯示卡片內容並開始計時），放大並置中 -->
+                <section id="game-screen" class="game-screen" hidden>
+                    <div class="shape-card shape-card--large shape-card--clickable" id="trial-card">
+                        <div class="shape-card__inner" id="trial-card-content"></div>
+                    </div>
+                </section>
+
             </div>
+
+            <!-- 彈跳視窗：目標圖形（顯示於遊戲主體區正中央） -->
+            <div class="modal-overlay" id="target-modal">
+                <div class="modal-card">
+                    <p class="target-screen__label">請記住本關目標圖形</p>
+                    <div class="shape-card" id="target-card">
+                        <div class="shape-card__inner" id="target-card-content"></div>
+                    </div>
+                    <p class="target-screen__hint">看到相同圖形的卡片時，請點擊卡片！</p>
+                    <button id="confirm-btn" class="shape-confirm-btn" type="button">確認，開始遊戲</button>
+                </div>
+            </div>
+
+            <!-- 彈跳視窗：倒數（顯示於遊戲主體區正中央） -->
+            <div class="modal-overlay modal-overlay--plain" id="countdown-modal" hidden>
+                <div class="countdown-number" id="countdown-number">3</div>
+            </div>
+
+            <!-- 彈跳視窗：結束畫面（30 張卡片跑完後才顯示於遊戲主體區正中央） -->
+            <div class="modal-overlay" id="end-modal" hidden>
+                <div class="modal-card">
+                    <p class="end-screen__title">本關結束！</p>
+                    <p class="end-screen__summary" id="end-summary"></p>
+                    <button id="back-btn" class="shape-confirm-btn" type="button">返回關卡選擇</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script src="js/scripts.js"></script>
+    <script src="js/level1_game.js"></script>
 </body>
 
 </html>
