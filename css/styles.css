@@ -43,6 +43,14 @@
   --border-yellow: #ffc85e;
   --border-blue: #6d9eff;
   --border-green: #59ea67;
+
+  /* game title */
+  --gametitle-bg-yellow: #efe6ae;
+  --gametitle-bg-blue: #c0defa;
+  --gametitle-bg-green: #afe3bf;
+  --gametitle-yellow: #ffbb38;
+  --gametitle-blue: #38b6ff;
+  --gametitle-green: #71dd6b;
 }
 
 *,
@@ -646,6 +654,205 @@ body {
   transform: rotate(15deg);
   transform-origin: center;
   z-index: 3;
+}
+
+/* ==========================================
+   遊戲畫面 (Game Screens)
+   ========================================== */
+.screen-game {
+  position: relative;
+}
+
+/* ---------- 頂部標題區 ---------- */
+.game-header {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 移除內距 padding，讓 pill 可以貼滿 header 上下邊界 */
+  padding: 0;
+  /* 建議可設定 height，或依靠 pill 的內容撐開高度 */
+  height: clamp(6rem, 14vh, 8rem);
+}
+
+.game-header__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  /* 將 height 設為 100% 填滿父容器(header)， padding-top/bottom 歸零 */
+  height: 100%;
+  padding: 0 clamp(5rem, 12vw, 7rem);
+  max-width: min(92%, 560px);
+  /* 確保內部計算尺寸時包含 border/padding */
+  box-sizing: border-box;
+}
+
+.game-header__title-img {
+  /* 圖片高度填滿 pill (或留少許 margin%，若需微調可設 80%~90%) */
+  height: 70%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ---------- 遊戲主體區 ---------- */
+.game-body {
+  flex: 1 1 auto;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-body__bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.game-body__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- 氣泡基礎樣式 ---------- */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4); /* 預設白色氣泡 */
+}
+
+/* ---------- 關卡特定氣泡顏色變數定義 ---------- */
+/* Level 1: 黃色系 (#FFCD6E) */
+.game-body--level1 {
+  background-color: var(--bg-yellow);
+  --bubble-dynamic-color: 255, 205, 110; /* #FFCD6E 的 RGB 值 */
+}
+
+/* Level 2: 藍色系 (#86CAF5) */
+.game-body--level2 {
+  background-color: var(--bg-blue);
+  --bubble-dynamic-color: 134, 202, 245; /* #86CAF5 的 RGB 值 */
+}
+
+/* Level 3: 綠色系 (#88F586) */
+.game-body--level3 {
+  background-color: var(--bg-green);
+  --bubble-dynamic-color: 136, 245, 134; /* #88F586 的 RGB 值 */
+}
+
+/* ---------- 氣泡個別位置與透明度設定 ---------- */
+.bubble--1 {
+  left: 36%;
+  top: 6%;
+  width: 5%;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(255, 255, 255, 0.49);
+}
+.bubble--2 {
+  left: 12%;
+  top: 22%;
+  width: 9%;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+.bubble--3 {
+  left: 16%;
+  top: 27%;
+  width: 13%;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(var(--bubble-dynamic-color), 0.17);
+}
+.bubble--4 {
+  left: 70%;
+  top: 26%;
+  width: 11%;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(var(--bubble-dynamic-color), 0.11);
+}
+.bubble--5 {
+  left: 76%;
+  top: 15%;
+  width: 8%;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(255, 255, 255, 0.31);
+}
+.bubble--6 {
+  left: 88%;
+  top: 42%;
+  width: 16%;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(255, 255, 255, 0.49);
+}
+.bubble--7 {
+  left: -6%;
+  top: 65%;
+  width: 26%;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(255, 255, 255, 0.42);
+}
+.bubble--8 {
+  left: 15%;
+  top: 88%;
+  width: 8%;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(var(--bubble-dynamic-color), 0.16);
+}
+.bubble--9 {
+  left: 53%;
+  top: 69%;
+  width: 10%;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(var(--bubble-dynamic-color), 0.12);
+  z-index: 1;
+}
+.bubble--10 {
+  left: 58%;
+  top: 71%;
+  width: 16%;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(var(--bubble-dynamic-color), 0.12);
+}
+
+/* ---------- Level 1 形狀獵人：藍色header/黃色body ---------- */
+.game-header--level1 {
+  background-color: var(--gametitle-bg-blue);
+}
+.game-header__pill--level1 {
+  background-color: var(--gametitle-blue);
+}
+.game-body--level1 {
+  background-color: var(--bg-yellow);
+}
+
+/* ---------- Level 2 方向快手：綠色header/藍色body ---------- */
+.game-header--level2 {
+  background-color: var(--gametitle-bg-green);
+}
+.game-header__pill--level2 {
+  background-color: var(--gametitle-green);
+}
+.game-body--level2 {
+  background-color: var(--bg-blue);
+}
+
+/* ---------- Level 3 色字挑戰：黃色header/綠色body ---------- */
+.game-header--level3 {
+  background-color: var(--gametitle-bg-yellow);
+}
+.game-header__pill--level3 {
+  background-color: var(--gametitle-yellow);
+}
+.game-body--level3 {
+  background-color: var(--bg-green);
 }
 
 /* ==========================================

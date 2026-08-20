@@ -125,7 +125,7 @@
       });
     }
 
-    // ---------- 進入遊戲 ----------
+    // ---------- 進入遊戲 (首頁) ----------
     var enterBtn = document.getElementById("enterGameBtn");
     if (enterBtn) {
       enterBtn.addEventListener("click", function () {
@@ -136,7 +136,7 @@
       });
     }
 
-    // ---------- 關卡頁按鈕點擊跳轉修飾 ----------
+    // ---------- 關卡頁按鈕點擊跳轉修飾 (關卡選擇頁) ----------
     var ribbonBtns = document.querySelectorAll(".ribbon-btn");
     ribbonBtns.forEach(function (btn) {
       btn.addEventListener("click", function (e) {
@@ -149,5 +149,19 @@
         }
       });
     });
+
+    // ---------- 進入遊戲 (關卡說明頁) ----------
+    // level_intro.html 會依據 URL 的 level 參數，動態設定此按鈕的 data-href
+    var introEnterBtn = document.getElementById("intro-enter-btn");
+    if (introEnterBtn) {
+      introEnterBtn.addEventListener("click", function () {
+        var targetUrl = introEnterBtn.getAttribute("data-href");
+        if (targetUrl) {
+          setTimeout(function () {
+            window.location.href = targetUrl;
+          }, 150);
+        }
+      });
+    }
   });
 })();
