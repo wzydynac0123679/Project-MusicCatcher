@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>方向快手</title>
     <link href="css/styles.css" rel="stylesheet">
+    <link href="css/level2_game.css" rel="stylesheet">
 </head>
 
 <body>
@@ -32,13 +33,87 @@
                 <span class="bubble bubble--9"></span>
                 <span class="bubble bubble--10"></span>
             </div>
+
             <div class="game-body__content">
-                <!-- 遊戲玩法內容，待後續實作 -->
+
+                <!-- 遊戲進行畫面：提示以主體上下左右「邊線亮條」顯示，方向按鍵則以十字型排列置於主體正中央 -->
+                <section id="game-screen" class="game-screen" hidden>
+                    <div class="direction-stage">
+
+                        <!-- 提示亮條：依提示方向亮起對應的邊 -->
+                        <div class="edge-cue edge-cue--up" id="edge-cue-up" aria-hidden="true"></div>
+                        <div class="edge-cue edge-cue--down" id="edge-cue-down" aria-hidden="true"></div>
+                        <div class="edge-cue edge-cue--left" id="edge-cue-left" aria-hidden="true"></div>
+                        <div class="edge-cue edge-cue--right" id="edge-cue-right" aria-hidden="true"></div>
+
+                        <!-- 方向按鍵：以十字型排列，置於遊戲主體正中央 -->
+                        <div class="direction-pad">
+                            <button class="direction-btn direction-btn--up" type="button" data-direction="up"
+                                aria-label="上">
+                                <svg class="direction-btn__arrow direction-btn__arrow--up" viewBox="0 0 100 100"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <polygon points="50,8 18,48 38,48 38,90 62,90 62,48 82,48" />
+                                </svg>
+                            </button>
+                            <button class="direction-btn direction-btn--down" type="button" data-direction="down"
+                                aria-label="下">
+                                <svg class="direction-btn__arrow direction-btn__arrow--down" viewBox="0 0 100 100"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <polygon points="50,8 18,48 38,48 38,90 62,90 62,48 82,48" />
+                                </svg>
+                            </button>
+                            <button class="direction-btn direction-btn--left" type="button" data-direction="left"
+                                aria-label="左">
+                                <svg class="direction-btn__arrow direction-btn__arrow--left" viewBox="0 0 100 100"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <polygon points="50,8 18,48 38,48 38,90 62,90 62,48 82,48" />
+                                </svg>
+                            </button>
+                            <button class="direction-btn direction-btn--right" type="button" data-direction="right"
+                                aria-label="右">
+                                <svg class="direction-btn__arrow direction-btn__arrow--right" viewBox="0 0 100 100"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <polygon points="50,8 18,48 38,48 38,90 62,90 62,48 82,48" />
+                                </svg>
+                            </button>
+                        </div>
+
+                    </div>
+                </section>
+
             </div>
+
+            <!-- 彈跳視窗：遊戲說明（顯示於遊戲主體區正中央） -->
+            <div class="modal-overlay" id="intro-modal">
+                <div class="modal-card">
+                    <p class="l2-modal__label">接下來畫面邊緣會亮起提示</p>
+                    <div class="l2-sample-cue" aria-hidden="true">
+                        <div class="l2-sample-cue__bar"></div>
+                    </div>
+                    <p class="l2-modal__hint">請判斷亮起的邊在畫面的哪個方向，並點擊該方向的按鍵！</p>
+                    <button id="confirm-btn" class="l2-confirm-btn" type="button">確認，開始遊戲</button>
+                </div>
+            </div>
+
+            <!-- 彈跳視窗：倒數（顯示於遊戲主體區正中央） -->
+            <div class="modal-overlay modal-overlay--plain" id="countdown-modal" hidden>
+                <div class="countdown-number" id="countdown-number">3</div>
+            </div>
+
+            <!-- 彈跳視窗：結束畫面（30 次跑完後才顯示於遊戲主體區正中央） -->
+            <div class="modal-overlay" id="end-modal" hidden>
+                <div class="modal-card">
+                    <p class="l2-modal__title">本關結束！</p>
+                    <p class="l2-modal__summary" id="end-summary"></p>
+                    <button id="back-btn" class="l2-confirm-btn" type="button">返回關卡選擇</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script src="js/scripts.js"></script>
+    <script src="js/level2_game.js"></script>
 </body>
 
 </html>
