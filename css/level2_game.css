@@ -1,0 +1,356 @@
+@charset "UTF-8";
+
+/* ==========================================
+   方向快手 - 遊戲流程專用樣式
+   ========================================== */
+
+.game-body {
+  position: relative;
+}
+
+.game-body__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- 遊戲進行畫面 ---------- */
+.game-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* 遊戲主體：提示亮條與方向按鍵都以此為基準（此容器即為遊戲主體區的完整範圍） */
+.direction-stage {
+  --edge-cue-thickness: 3rem; /* 亮條寬度固定，不隨螢幕縮放 */
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- 提示亮條：直接佔滿遊戲主體區對應邊界的整個寬（或高），寬度固定 ---------- */
+.edge-cue {
+  position: absolute;
+  background-color: #ff5757;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 上／下：佔滿主體整個寬度，貼齊上或下邊界 */
+.edge-cue--up,
+.edge-cue--down {
+  left: 0;
+  right: 0;
+  height: var(--edge-cue-thickness);
+}
+.edge-cue--up {
+  top: 0;
+}
+.edge-cue--down {
+  bottom: 0;
+}
+
+/* 左／右：佔滿主體整個高度，貼齊左或右邊界 */
+.edge-cue--left,
+.edge-cue--right {
+  top: 0;
+  bottom: 0;
+  width: var(--edge-cue-thickness);
+}
+.edge-cue--left {
+  left: 0;
+}
+.edge-cue--right {
+  right: 0;
+}
+
+/* 顯示中：3 秒動畫 = 第一秒閃爍 2 下，後面兩秒維持恆亮 */
+.edge-cue.is-active {
+  animation: edgeCuePulse 3s linear forwards;
+}
+
+@keyframes edgeCuePulse {
+  0% {
+    opacity: 1;
+  }
+  8.28% {
+    opacity: 1;
+  }
+  8.38% {
+    opacity: 0;
+  }
+  16.62% {
+    opacity: 0;
+  }
+  16.72% {
+    opacity: 1;
+  }
+  24.95% {
+    opacity: 1;
+  }
+  25.05% {
+    opacity: 0;
+  }
+  33.28% {
+    opacity: 0;
+  }
+  33.38% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ---------- 方向按鍵：十字型排列，置於遊戲主體正中央 ---------- */
+.direction-pad {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+  gap: clamp(0.75rem, 2.4vw, 1.5rem);
+  justify-items: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.direction-btn--up {
+  grid-column: 2;
+  grid-row: 1;
+}
+.direction-btn--down {
+  grid-column: 2;
+  grid-row: 3;
+}
+.direction-btn--left {
+  grid-column: 1;
+  grid-row: 2;
+}
+.direction-btn--right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.direction-btn {
+  appearance: none;
+  cursor: pointer;
+  width: clamp(5.5rem, 13vw, 8rem);
+  height: clamp(5.5rem, 13vw, 8rem);
+  background-color: #ffffff;
+  border: 4px solid #7f7f7f;
+  border-radius: clamp(1rem, 2.4vw, 1.6rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.8rem, 2vw, 1.1rem);
+  transition:
+    transform 0.12s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.direction-btn:hover {
+  transform: translateY(-2px);
+}
+
+.direction-btn:active {
+  transform: scale(0.94);
+}
+
+.direction-btn:focus-visible {
+  outline: 3px solid var(--border-green);
+  outline-offset: 3px;
+}
+
+/* 有按下的互動提示（不區分答對/答錯，純粹表示「這顆鍵被按了」） */
+.direction-btn.is-pressed {
+  background-color: #eef1f5;
+  border-color: #5a5a5a;
+  transform: scale(0.94);
+}
+
+.direction-btn__arrow {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.direction-btn__arrow polygon {
+  fill: #71dd6b;
+  stroke: #2e9429;
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+/* 箭頭圖形本身以「朝上」繪製，依按鍵方向旋轉 */
+.direction-btn__arrow--up {
+  transform: rotate(0deg);
+}
+.direction-btn__arrow--right {
+  transform: rotate(90deg);
+}
+.direction-btn__arrow--down {
+  transform: rotate(180deg);
+}
+.direction-btn__arrow--left {
+  transform: rotate(270deg);
+}
+
+/* ---------- 彈跳視窗（說明 / 倒數 / 結束）：疊在遊戲主體區正中央 ---------- */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(20, 60, 30, 0.35);
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal-overlay--plain {
+  background-color: rgba(20, 60, 30, 0.45);
+}
+
+.modal-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3vh, 1.5rem);
+  width: min(92%, 520px);
+  background-color: #ffffff;
+  border-radius: clamp(1.5rem, 4vw, 2.5rem);
+  padding: clamp(1.5rem, 4vh, 2.5rem) clamp(1.5rem, 5vw, 3rem);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
+  animation: modalPopIn 0.2s ease;
+}
+
+@keyframes modalPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---------- 說明彈跳視窗內文字與範例圖 ---------- */
+.l2-modal__label {
+  font-size: clamp(1.3rem, 3.4vw, 1.8rem);
+  font-weight: 700;
+  color: var(--word-green);
+  margin: 0;
+  text-align: center;
+}
+
+.l2-modal__hint {
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  font-weight: 600;
+  color: var(--word-green);
+  margin: 0;
+  text-align: center;
+}
+
+/* 說明彈窗中的範例亮條，示意實際遊戲畫面邊緣亮起的效果（無限循環播放） */
+.l2-sample-cue {
+  width: clamp(6rem, 20vw, 9rem);
+  height: clamp(1.2rem, 3.4vw, 1.8rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.l2-sample-cue__bar {
+  width: 100%;
+  height: 100%;
+  background-color: #ff5757;
+  border-radius: 999px;
+  animation: edgeCuePulse 3s linear infinite;
+}
+
+.l2-confirm-btn {
+  appearance: none;
+  border: 6px solid var(--border-green);
+  cursor: pointer;
+  background: var(--btn-green);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+  border-radius: 999px;
+  padding: clamp(0.6rem, 2vh, 1rem) clamp(2rem, 6vw, 3rem);
+  transition: transform 0.15s ease;
+}
+
+.l2-confirm-btn:hover {
+  transform: translateY(-2px);
+}
+
+.l2-confirm-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.l2-confirm-btn:focus-visible {
+  outline: 3px solid var(--border-level-green);
+  outline-offset: 3px;
+}
+
+/* ---------- 倒數數字 ---------- */
+.countdown-number {
+  font-size: clamp(6rem, 20vw, 10rem);
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.15);
+  animation: countdownPop 1s ease;
+}
+
+.countdown-number--go {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+}
+
+@keyframes countdownPop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  30% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ---------- 結束彈跳視窗內文字 ---------- */
+.l2-modal__title {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 800;
+  color: var(--word-green);
+  margin: 0;
+  text-align: center;
+}
+
+.l2-modal__summary {
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  font-weight: 600;
+  color: var(--word-default);
+  text-align: center;
+  margin: 0;
+  white-space: pre-line;
+}
