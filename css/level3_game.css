@@ -1,0 +1,253 @@
+@charset "UTF-8";
+
+/* ==========================================
+   色字挑戰 - 遊戲流程專用樣式
+   ========================================== */
+
+.game-body {
+  position: relative;
+}
+
+.game-body__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- 遊戲進行畫面 ---------- */
+.game-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* 遊戲主體：分為上（題目）、下（顏色選項）兩個部分 */
+.stroop-stage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- 上半部：題目文字 ---------- */
+.stroop-question-area {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vh, 2rem);
+}
+
+.stroop-question {
+  font-size: clamp(5.5rem, 17vw, 10rem);
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  -webkit-text-stroke-width: 12px;
+  paint-order: stroke fill;
+}
+
+/* ---------- 下半部：6 個導圓角的顏色方塊選項 ---------- */
+.stroop-options-area {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(0.75rem, 2.4vw, 1.5rem);
+  padding: clamp(1rem, 3vh, 2rem);
+}
+
+.color-btn {
+  appearance: none;
+  cursor: pointer;
+  width: clamp(5.5rem, 15vw, 9rem);
+  height: clamp(5.5rem, 15vw, 9rem);
+  border-radius: clamp(1rem, 2.4vw, 1.6rem);
+  border: 7px solid var(--btn-border);
+  background-color: var(--btn-bg);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.15s ease;
+}
+
+.color-btn:hover {
+  transform: translateY(-2px);
+}
+
+.color-btn:active {
+  transform: scale(0.94);
+}
+
+.color-btn:focus-visible {
+  outline: 3px solid var(--border-green);
+  outline-offset: 3px;
+}
+
+/* 有按下的互動提示（不區分答對/答錯，純粹表示「這顆鍵被按了」） */
+.color-btn.is-pressed {
+  transform: scale(0.94);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.12) inset;
+}
+
+.color-btn--white {
+  --btn-bg: #ffffff;
+  --btn-border: #7f7f7f;
+}
+.color-btn--blue {
+  --btn-bg: #5070ff;
+  --btn-border: #191d8f;
+}
+.color-btn--yellow {
+  --btn-bg: #fcff5c;
+  --btn-border: #9d8522;
+}
+.color-btn--red {
+  --btn-bg: #ff5757;
+  --btn-border: #982b2b;
+}
+.color-btn--purple {
+  --btn-bg: #9440dd;
+  --btn-border: #43106f;
+}
+.color-btn--black {
+  --btn-bg: #3d3d3d;
+  --btn-border: #000000;
+}
+
+/* ---------- 彈跳視窗（說明 / 倒數 / 結束）：疊在遊戲主體區正中央 ---------- */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(20, 60, 30, 0.35);
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal-overlay--plain {
+  background-color: rgba(20, 60, 30, 0.45);
+}
+
+.modal-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3vh, 1.5rem);
+  width: min(92%, 520px);
+  background-color: #ffffff;
+  border-radius: clamp(1.5rem, 4vw, 2.5rem);
+  padding: clamp(1.5rem, 4vh, 2.5rem) clamp(1.5rem, 5vw, 3rem);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
+  animation: modalPopIn 0.2s ease;
+}
+
+@keyframes modalPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---------- 說明彈跳視窗內文字 ---------- */
+.l3-modal__label {
+  font-size: clamp(1.3rem, 3.4vw, 1.8rem);
+  font-weight: 700;
+  color: var(--word-green);
+  margin: 0;
+  text-align: center;
+}
+
+.l3-modal__hint {
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  font-weight: 600;
+  color: var(--word-green);
+  margin: 0;
+  text-align: center;
+}
+
+.l3-confirm-btn {
+  appearance: none;
+  border: 6px solid var(--border-green);
+  cursor: pointer;
+  background: var(--btn-green);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+  border-radius: 999px;
+  padding: clamp(0.6rem, 2vh, 1rem) clamp(2rem, 6vw, 3rem);
+  transition: transform 0.15s ease;
+}
+
+.l3-confirm-btn:hover {
+  transform: translateY(-2px);
+}
+
+.l3-confirm-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.l3-confirm-btn:focus-visible {
+  outline: 3px solid var(--border-level-green);
+  outline-offset: 3px;
+}
+
+/* ---------- 倒數數字 ---------- */
+.countdown-number {
+  font-size: clamp(6rem, 20vw, 10rem);
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.15);
+  animation: countdownPop 1s ease;
+}
+
+.countdown-number--go {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+}
+
+@keyframes countdownPop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  30% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ---------- 結束彈跳視窗內文字 ---------- */
+.l3-modal__title {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 800;
+  color: var(--word-green);
+  margin: 0;
+  text-align: center;
+}
+
+.l3-modal__summary {
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  font-weight: 600;
+  color: var(--word-default);
+  text-align: center;
+  margin: 0;
+  white-space: pre-line;
+}

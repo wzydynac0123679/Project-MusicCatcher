@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>色字挑戰</title>
     <link href="css/styles.css" rel="stylesheet">
+    <link href="css/level3_game.css" rel="stylesheet">
 </head>
 
 <body>
@@ -32,13 +33,65 @@
                 <span class="bubble bubble--9"></span>
                 <span class="bubble bubble--10"></span>
             </div>
+
             <div class="game-body__content">
-                <!-- 遊戲玩法內容，待後續實作 -->
+
+                <!-- 遊戲進行畫面：上半部顯示題目文字，下半部為 6 個顏色方塊選項 -->
+                <section id="game-screen" class="game-screen" hidden>
+                    <div class="stroop-stage">
+
+                        <div class="stroop-question-area">
+                            <div class="stroop-question" id="stroop-question" aria-live="polite"></div>
+                        </div>
+
+                        <div class="stroop-options-area">
+                            <button class="color-btn color-btn--white" type="button" data-color="white"
+                                aria-label="白"></button>
+                            <button class="color-btn color-btn--blue" type="button" data-color="blue"
+                                aria-label="藍"></button>
+                            <button class="color-btn color-btn--yellow" type="button" data-color="yellow"
+                                aria-label="黃"></button>
+                            <button class="color-btn color-btn--red" type="button" data-color="red"
+                                aria-label="紅"></button>
+                            <button class="color-btn color-btn--purple" type="button" data-color="purple"
+                                aria-label="紫"></button>
+                            <button class="color-btn color-btn--black" type="button" data-color="black"
+                                aria-label="黑"></button>
+                        </div>
+
+                    </div>
+                </section>
+
             </div>
+
+            <!-- 彈跳視窗：遊戲說明（依這次隨機決定的作答依據顯示對應文字） -->
+            <div class="modal-overlay" id="intro-modal">
+                <div class="modal-card">
+                    <p class="l3-modal__label" id="intro-instruction">接下來請依照文字的顏色作答</p>
+                    <p class="l3-modal__hint">請判斷後點擊下方對應的顏色方塊！</p>
+                    <button id="confirm-btn" class="l3-confirm-btn" type="button">確認，開始遊戲</button>
+                </div>
+            </div>
+
+            <!-- 彈跳視窗：倒數（顯示於遊戲主體區正中央） -->
+            <div class="modal-overlay modal-overlay--plain" id="countdown-modal" hidden>
+                <div class="countdown-number" id="countdown-number">3</div>
+            </div>
+
+            <!-- 彈跳視窗：結束畫面（30 題跑完後才顯示於遊戲主體區正中央） -->
+            <div class="modal-overlay" id="end-modal" hidden>
+                <div class="modal-card">
+                    <p class="l3-modal__title">本關結束！</p>
+                    <p class="l3-modal__summary" id="end-summary"></p>
+                    <button id="back-btn" class="l3-confirm-btn" type="button">返回關卡選擇</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script src="js/scripts.js"></script>
+    <script src="js/level3_game.js"></script>
 </body>
 
 </html>
